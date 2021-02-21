@@ -10,9 +10,12 @@ public class PlayerController : MonoBehaviour
 
     private bool isGrounded;
     private bool isTouchingPipe;
+    private bool isNearStick;
     private bool canJump;
     private bool canClimb;
+    private bool canBreakStick;
     private bool isFacingLeft = true;
+    private bool powered = true;
 
     public float movementSpeed = 10.0f;
     public float jumpForce = 16.0f;
@@ -20,11 +23,21 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;
     public float pipeCheckRadius;
 
+    public float stickCheckRadius;
+
     public Transform groundCheck;
     public Transform pipeCheck;
+    public Transform stickCheck;
 
     public LayerMask whatIsGround;
     public LayerMask whatIsPipe;
+    public LayerMask whatIsStick;
+
+    public GameObject stick;
+    public GameObject brokenStick1;
+    public GameObject brokenStick2;
+    public GameObject fallingLog;
+
 
     void Start()
     {
@@ -36,6 +49,7 @@ public class PlayerController : MonoBehaviour
         CheckInput();
         CheckIfCanJump();
         CheckIfCanClimb();
+        CheckIfCanBreakStick();
         CheckMovementDirection();
     }
 
@@ -72,6 +86,11 @@ public class PlayerController : MonoBehaviour
         {
             Climb();
         }
+        if(Input.GetButtonDown("Fire1"))
+        {
+            BreakStick();
+            TurnOffGenerator();
+        }
     }
 
     private void CheckIfCanJump()
@@ -100,6 +119,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void CheckIfCanBreakStick()
+    {
+        if(isNearStick)
+        {
+            canBreakStick = true;
+        }
+        else
+        {
+            canBreakStick = false;
+        }
+    }
+
     private void ApplyMovement()
     {
         rigidBody.velocity = new Vector2(movementSpeed * movementInputDirection, rigidBody.velocity.y);
@@ -109,6 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
         isTouchingPipe = Physics2D.OverlapCircle(pipeCheck.position, pipeCheckRadius, whatIsPipe);
+        isNearStick = Physics2D.OverlapCircle(stickCheck.position, stickCheckRadius, whatIsStick);
     }
 
     private void Jump()
@@ -128,6 +160,52 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    private void BreakStick()
+    {
+        if(canBreakStick)
+        {
+            Destroy(stick);
+            ReplaceStick();
+            FallLog();
+        }
+    }
+
+    private void ReplaceStick()
+    {
+        brokenStick1.GetComponent<SpriteRenderer>().enabled = true;
+        brokenStick1.GetComponent<Rigidbody2D>().simulated = true;
+
+        brokenStick2.GetComponent<SpriteRenderer>().enabled = true;
+        brokenStick2.GetComponent<Rigidbody2D>().simulated = true;
+    }
+
+    private void FallLog()
+    {
+        fallingLog.GetComponent<Rigidbody2D>().simulated = true;
+    }
+
+    private void TurnOffGenerator()
+    {
+        RaycastHit2D hit;
+        if(!isFacingLeft)
+        {
+            hit = Physics2D.Raycast(rigidBody.position, Vector2.right, 1.0f, LayerMask.GetMask("Generator"));
+        }
+        else
+        {
+            hit = Physics2D.Raycast(rigidBody.position, Vector2.left, 1.0f, LayerMask.GetMask("Generator"));
+        }
+
+        if(hit.collider != null)
+        {
+            ElectricityController.instance.SetIsPowered(!powered);
+        }
+
+
+        
+         
+    }
+
     private void Flip()
     {
         isFacingLeft = !isFacingLeft;
@@ -138,5 +216,6 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
         Gizmos.DrawWireSphere(pipeCheck.position, pipeCheckRadius);
+        Gizmos.DrawWireSphere(stickCheck.position, stickCheckRadius);
     }
 }

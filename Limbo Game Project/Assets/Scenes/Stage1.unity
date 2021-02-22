@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb91d862984dd5046a0b9cf8df46fd77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetToPlayer: {x: 3.94, y: 5.55, z: -26.9}
+  offsetToPlayer: {x: 3.94, y: 5.55, z: -16.4}
   maxSpeed: 80
 --- !u!1 &808308813
 GameObject:

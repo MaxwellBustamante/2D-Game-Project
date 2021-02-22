@@ -905,7 +905,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "HOW TO PLAY: \r\n\r\nPress Left Arrow/Right Arrow to Move Left and Right\r\nPress
     Left CTRL to Interact with Objects, such as the Stick \r\nand the Generator\r\nPress
-    Up Arrow to Jump."
+    Up Arrow to Jump.\n\nCREDITS:\nArt by Maxwell Bustamante.\nTech by Racquel Christie.\nCode
+    by Eddy Elquezabal."
 --- !u!222 &1904465948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -989,8 +990,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994480950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.029, y: -0.132, z: 0}
-  m_LocalScale: {x: 0.92690045, y: 0.9593892, z: 1}
+  m_LocalPosition: {x: 0.014, y: -0.056, z: -3.4375}
+  m_LocalScale: {x: 0.99380434, y: 0.938094, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

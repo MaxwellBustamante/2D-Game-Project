@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -38,10 +40,16 @@ public class PlayerController : MonoBehaviour
     public GameObject brokenStick2;
     public GameObject fallingLog;
 
+    public KeyCode JumpKey = KeyCode.UpArrow, BreakStickKey = KeyCode.LeftControl, ClimbKey = KeyCode.UpArrow;
+    public UnityEvent OnPlayerJump, OnPlayerDeath, OnPlayerWin, OnPlayerClimb;
+    public float fallAnimationCheck = 0.1f;
+
+    public LimboyAnimation LimboyAnimator;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        LimboyAnimator = GetComponent<LimboyAnimation>();
     }
     
     void Update()
@@ -51,6 +59,52 @@ public class PlayerController : MonoBehaviour
         CheckIfCanClimb();
         CheckIfCanBreakStick();
         CheckMovementDirection();
+        CheckWalkAnimation();
+    }
+
+    private void CheckWalkAnimation()
+    {
+        if (isGrounded)
+        {
+            float xabs = Mathf.Abs(movementInputDirection);
+            float yabs = Mathf.Abs(rigidBody.velocity.y);
+            bool yabsokay = yabs < fallAnimationCheck;
+            if(xabs > 0)
+            {
+                //LimboyAnimator.SetAnimationSpeed(1)
+                if (!isTouchingPipe)
+                {
+                    LimboyAnimator.SetWalk();
+                }
+              
+            }
+            else if (isTouchingPipe)
+            {
+                LimboyAnimator.SetClimb();
+            }
+            else
+            {
+                if(yabsokay)
+                {
+                    //LimboyAnimator.SetAnimationSpeed(0);
+                }
+                
+            }
+        }
+        else
+        {
+            //LimboyAnimator.SetAnimationSpeed(1);
+        }
+
+    }
+    public void setPlayerDeath()
+    {
+        OnPlayerDeath.Invoke();
+    }
+    
+    public void setPlayerWin()
+    {
+        OnPlayerWin.Invoke();
     }
 
     private void FixedUpdate()
@@ -75,18 +129,18 @@ public class PlayerController : MonoBehaviour
         movementInputDirection = Input.GetAxisRaw("Horizontal");
         verticalInputDirection = Input.GetAxisRaw("Vertical");
 
-        if(Input.GetButtonDown("Jump"))
+        if(Input.GetKeyDown(JumpKey))
         {
             if(!canClimb)
             {
                 Jump();
             }       
         }
-        if(Input.GetButtonDown("Vertical"))
+        if(Input.GetKeyDown(ClimbKey))
         {
             Climb();
         }
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetKeyDown(BreakStickKey))
         {
             BreakStick();
             TurnOffGenerator();
@@ -144,10 +198,13 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Jump()
-    {   
+    {
+        //Debug.LogError("Youre mom gay");
         if(canJump)
         {
+            OnPlayerJump.Invoke();
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+            //Debug.LogError("YouGayHAGOTTEMREKTIDIOT");
         }  
     }
 
@@ -155,6 +212,7 @@ public class PlayerController : MonoBehaviour
     {
         if(canClimb)
         {
+            OnPlayerClimb.Invoke();
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, climbingSpeed * verticalInputDirection);     
         }
         

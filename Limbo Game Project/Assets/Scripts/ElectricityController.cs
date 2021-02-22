@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ElectricityController : MonoBehaviour
 {   
@@ -12,6 +13,9 @@ public class ElectricityController : MonoBehaviour
     public Sprite unlitSprite;
     private SpriteRenderer sprite;
     private static bool isPowered = true;
+
+    public UnityEvent onTogglePowerOn;
+    public UnityEvent onTogglePowerOff;
 
     void Awake()
     {
@@ -53,11 +57,13 @@ public class ElectricityController : MonoBehaviour
     private void TurnOnLights()
     {
         sprite.sprite = litSprite;
+        onTogglePowerOn.Invoke();
     }
 
     private void TurnOffLights()
     {
         sprite.sprite = unlitSprite;
+        onTogglePowerOff.Invoke();
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -66,11 +72,13 @@ public class ElectricityController : MonoBehaviour
         {
             if(!lightsOn)
             {
-                if(collision.gameObject.layer == 10)
+                var player = collision.gameObject.GetComponent<PlayerController>();
+                if (player != null)
                 {
-                    Destroy(collision.gameObject);
-                } 
-            }   
+                    player.setPlayerDeath();
+                }
+
+            }
         }
         
     }

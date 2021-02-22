@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5946186697502883579}
   - component: {fileID: 5946186697502883580}
-  - component: {fileID: 5946186697502883578}
   - component: {fileID: 5946186697502883581}
+  - component: {fileID: 8393825889256765829}
   m_Layer: 8
-  m_Name: H Unlit
+  m_Name: H
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,24 +80,9 @@ SpriteRenderer:
   m_Size: {x: 20, y: 20}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5946186697502883578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5946186697502883582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5709244a16a58ab47b520f2c0b10c2c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  electricityInterval: 2
-  litSprite: {fileID: 21300000, guid: 54fe4a64c66c2824eb18f72434a05bcc, type: 3}
-  unlitSprite: {fileID: 21300000, guid: 3efb658cc3235254a9876d6c454a5f24, type: 3}
 --- !u!60 &5946186697502883581
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -135,3 +120,24 @@ PolygonCollider2D:
       - {x: -2.0407963, y: -2.3282547}
       - {x: -2.049471, y: -5.9719353}
       - {x: -5.958364, y: -5.9580564}
+--- !u!114 &8393825889256765829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5946186697502883582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef892bb9c8c90404e8faef06a0fc3fda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  electricityInterval: 5
+  litSprite: {fileID: 21300000, guid: afd76cb938970ba46a6a67c18b0a4a44, type: 3}
+  unlitSprite: {fileID: 21300000, guid: 687936d163090db43ba04d105d707ed0, type: 3}
+  onTogglePowerOn:
+    m_PersistentCalls:
+      m_Calls: []
+  onTogglePowerOff:
+    m_PersistentCalls:
+      m_Calls: []

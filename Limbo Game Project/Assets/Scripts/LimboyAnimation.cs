@@ -7,6 +7,11 @@ public class LimboyAnimation : MonoBehaviour
     public Animator PlayerAnimator;
     public string WalkTrigger = "SetWalk", JumpTrigger = "SetJump", ClimbTrigger = "SetClimb";
 
+    public void SetAnimationSpeed(float Speed)
+    {
+        PlayerAnimator.speed = Speed;
+    }
+
     public void SetAnimationTrigger(string TriggerName)
     {
         PlayerAnimator.SetTrigger(TriggerName);
@@ -17,7 +22,9 @@ public class LimboyAnimation : MonoBehaviour
         if (PlayerAnimator == null)
         {
             PlayerAnimator = GetComponent<Animator>();
-        } 
+        }
+
+        SetAnimationSpeed(1);
     }
 
     [ContextMenu("TestWalk")]

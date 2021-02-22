@@ -1812,7 +1812,7 @@ GameObject:
   - component: {fileID: 853945548}
   - component: {fileID: 853945547}
   - component: {fileID: 853945550}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3057,6 +3057,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: T
       objectReference: {fileID: 0}
+    - target: {fileID: 2377471874438746153, guid: 5e582ac43efe17e48a46d9105e28dd09,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2377471874438746154, guid: 5e582ac43efe17e48a46d9105e28dd09,
         type: 3}
       propertyPath: m_Sprite
@@ -3191,6 +3196,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: O (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3652272798897335028, guid: 2aa86095be8c0594e8e64ef5f9f49d59,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3652272798897335030, guid: 2aa86095be8c0594e8e64ef5f9f49d59,
         type: 3}

@@ -100,11 +100,13 @@ public class PlayerController : MonoBehaviour
     public void setPlayerDeath()
     {
         OnPlayerDeath.Invoke();
+
     }
     
     public void setPlayerWin()
     {
         OnPlayerWin.Invoke();
+
     }
 
     private void FixedUpdate()

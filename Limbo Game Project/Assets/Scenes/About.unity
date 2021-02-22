@@ -903,9 +903,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "HOW TO PLAY: \n\nUse arrow keys to control character and press CTRL to
-    select\n\n\n\n\nCREDITS:\n\nMaxwell Bustamante\r - Art\nEddy Elguezabal - Code\nRacquel
-    Christie\r - Tech\n"
+  m_Text: "HOW TO PLAY: \r\n\r\nPress Left Arrow/Right Arrow to Move Left and Right\r\nPress
+    Left CTRL to Interact with Objects, such as the Stick \r\nand the Generator\r\nPress
+    Up Arrow to Jump."
 --- !u!222 &1904465948
 CanvasRenderer:
   m_ObjectHideFlags: 0

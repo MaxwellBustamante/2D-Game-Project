@@ -57,13 +57,13 @@ public class ElectricityController : MonoBehaviour
     private void TurnOnLights()
     {
         sprite.sprite = litSprite;
-        onTogglePowerOn.Invoke();
+        onTogglePowerOff.Invoke();
     }
 
     private void TurnOffLights()
     {
         sprite.sprite = unlitSprite;
-        onTogglePowerOff.Invoke();
+        onTogglePowerOn.Invoke();
     }
 
     void OnCollisionStay2D(Collision2D collision)
